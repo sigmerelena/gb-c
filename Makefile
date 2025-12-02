@@ -10,7 +10,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $(EXECUTABLE)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -p %@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf build
