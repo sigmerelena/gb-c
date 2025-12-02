@@ -28,12 +28,18 @@ int main(int argc, char *argv[]) {
     fclose(f);
     return 1;
   }
-
-  fclose(f);
-
   printf("loaded rom %s (%ld bytes)\n", argv[1], size);
 
-  printf("%02X", rom[0x100]);
+  fseek(f, 0x0104, SEEK_SET);
+  for (int i = 0; i < 48; i++) {
+    int byte = fgetc(f);
+    if (byte == EOF)
+      break;
+    printf("%02X ", byte);
+    if ((i + 1) % 16 == 0)
+      printf("\n");
+  }
+  fclose(f);
   printf("\n");
   free(rom);
 
